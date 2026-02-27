@@ -1,0 +1,426 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Animación Progresiva</title>
+<style>
+:root{
+  --bg:#0b1020; --card:#111a33; --text:#e9eefc; --muted:#8a9bc8;
+  --red:#e74c3c; --yellow:#f1c40f; --green:#2ecc71;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{
+  background:linear-gradient(160deg,#070a14 0%,#0d1528 100%);
+  color:var(--text);
+  font:14px/1.4 system-ui,Segoe UI,Roboto,Arial;
+  min-height:100vh; padding:28px 20px;
+}
+.wrap{max-width:1060px;margin:auto;}
+
+/* HEADER */
+.header{text-align:center;margin-bottom:28px;}
+.header h1{font-size:22px;font-weight:900;letter-spacing:.3px;margin-bottom:6px;}
+.header p{color:var(--muted);font-size:13px;}
+
+/* CONTROLS */
+.controls{
+  display:flex;gap:10px;flex-wrap:wrap;align-items:center;
+  justify-content:center;margin-bottom:22px;
+}
+.btn{
+  padding:8px 18px;border-radius:999px;border:1px solid rgba(255,255,255,.15);
+  background:rgba(255,255,255,.06);color:var(--text);cursor:pointer;
+  font-size:13px;font-weight:600;transition:all .2s;
+}
+.btn:hover{background:rgba(255,255,255,.14);}
+.btn.active{background:#2980b9;border-color:#2980b9;color:#fff;}
+.btn-play{
+  padding:8px 22px;border-radius:999px;
+  background:linear-gradient(135deg,#2980b9,#8e44ad);
+  border:none;color:#fff;cursor:pointer;font-size:13px;font-weight:700;
+  box-shadow:0 4px 18px rgba(41,128,185,.4);transition:all .2s;
+}
+.btn-play:hover{transform:scale(1.04);box-shadow:0 6px 24px rgba(41,128,185,.6);}
+
+/* TIMELINE SLIDER */
+.timeline{
+  display:flex;align-items:center;gap:14px;
+  background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);
+  border-radius:12px;padding:12px 18px;margin-bottom:22px;
+}
+.timeline label{color:var(--muted);font-size:12px;white-space:nowrap;}
+input[type=range]{
+  flex:1;accent-color:#2980b9;cursor:pointer;
+}
+.year-badge{
+  font-size:22px;font-weight:900;
+  background:linear-gradient(135deg,#5aa9ff,#38d39f);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  min-width:52px;text-align:right;
+}
+
+/* TABLE */
+.table-wrap{
+  border-radius:14px;overflow:hidden;
+  border:1px solid rgba(255,255,255,.08);
+}
+table{width:100%;border-collapse:collapse;}
+thead th{
+  background:rgba(255,255,255,.05);
+  color:var(--muted);font-size:11px;font-weight:700;
+  text-transform:uppercase;letter-spacing:.6px;
+  padding:12px 14px;border-bottom:1px solid rgba(255,255,255,.08);
+  cursor:pointer;user-select:none;
+}
+thead th:hover{color:var(--text);}
+tbody tr{transition:background .2s;}
+tbody tr:hover{background:rgba(255,255,255,.03);}
+tbody td{
+  padding:10px 12px;
+  border-bottom:1px solid rgba(255,255,255,.05);
+  vertical-align:middle;
+}
+tbody tr:last-child td{border-bottom:none;}
+
+.eje-name{font-weight:700;font-size:13px;}
+.eje-unit{font-size:11px;color:var(--muted);margin-top:2px;}
+
+/* CELL */
+.cell{
+  border-radius:10px;padding:10px 12px;
+  display:flex;justify-content:space-between;align-items:center;gap:8px;
+  border:1px solid rgba(255,255,255,.08);
+  transition:background .6s ease, box-shadow .4s;
+  position:relative;overflow:hidden;
+}
+.cell::before{
+  content:"";position:absolute;inset:0;
+  background:rgba(255,255,255,.06);
+  transform:translateX(-100%);
+  transition:transform .8s ease;
+}
+.cell.animate::before{transform:translateX(100%);}
+
+.cell-val{font-weight:800;font-size:14px;}
+.cell-pct{
+  font-size:11px;font-weight:700;
+  padding:2px 7px;border-radius:999px;
+  background:rgba(0,0,0,.25);
+  white-space:nowrap;
+}
+.cell-bar{
+  position:absolute;bottom:0;left:0;height:3px;
+  border-radius:0 0 10px 10px;
+  transition:width .9s cubic-bezier(.4,0,.2,1);
+}
+
+/* SEMAFORO */
+.sem-dot{
+  width:14px;height:14px;border-radius:50%;
+  display:inline-block;margin-right:8px;
+  box-shadow:0 0 8px currentColor;
+  flex-shrink:0;
+}
+.sem-text{font-size:12px;font-weight:600;}
+
+/* LEGEND */
+.legend{
+  display:flex;gap:16px;flex-wrap:wrap;align-items:center;
+  margin-top:16px;font-size:12px;color:var(--muted);
+  justify-content:center;
+}
+.leg-item{display:flex;align-items:center;gap:6px;}
+.leg-dot{width:10px;height:10px;border-radius:50%;}
+.grad{
+  width:180px;height:10px;border-radius:999px;
+  background:linear-gradient(90deg,#e74c3c 0%,#f1c40f 50%,#2ecc71 100%);
+}
+
+/* SORT MARK */
+.sort-mark{font-size:10px;margin-left:4px;opacity:.7;}
+
+/* PROGRESS BAR GLOBAL */
+.global-bar{
+  height:4px;border-radius:999px;
+  background:rgba(255,255,255,.06);
+  margin-bottom:22px;overflow:hidden;
+}
+.global-fill{
+  height:100%;border-radius:999px;
+  background:linear-gradient(90deg,#2980b9,#38d39f);
+  transition:width 1s ease;
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="header">
+    <h1>⚡ Estrategia — Avance vs Meta 2050</h1>
+    <p>Heatmap con animación progresiva · Semáforo en Refinerías · Ordenamiento dinámico</p>
+  </div>
+
+  <!-- CONTROLS -->
+  <div class="controls">
+    <button class="btn-play" id="btnPlay">▶ Reproducir</button>
+    <button class="btn active" data-year="2030">2030</button>
+    <button class="btn" data-year="2040">2040</button>
+    <button class="btn" data-year="2050">2050</button>
+  </div>
+
+  <!-- TIMELINE -->
+  <div class="timeline">
+    <label>2025</label>
+    <input type="range" id="slider" min="2025" max="2050" step="1" value="2030"/>
+    <label>2050</label>
+    <div class="year-badge" id="yearBadge">2030</div>
+  </div>
+
+  <!-- GLOBAL PROGRESS -->
+  <div class="global-bar">
+    <div class="global-fill" id="globalFill" style="width:0%"></div>
+  </div>
+
+  <!-- TABLE -->
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Eje</th>
+          <th data-sort="val" id="thVal">Valor actual <span class="sort-mark" id="smVal"></span></th>
+          <th data-sort="pct" id="thPct">Avance vs 2050 <span class="sort-mark" id="smPct"></span></th>
+          <th>Meta 2050</th>
+          <th>Estado</th>
+        </tr>
+      </thead>
+      <tbody id="tbody"></tbody>
+    </table>
+  </div>
+
+  <div class="legend">
+    <div class="leg-item"><div class="grad"></div><span>Bajo → Alto avance</span></div>
+    <div class="leg-item"><div class="leg-dot" style="background:#e74c3c;box-shadow:0 0 6px #e74c3c"></div><span>0–33%</span></div>
+    <div class="leg-item"><div class="leg-dot" style="background:#f1c40f;box-shadow:0 0 6px #f1c40f"></div><span>34–66%</span></div>
+    <div class="leg-item"><div class="leg-dot" style="background:#2ecc71;box-shadow:0 0 6px #2ecc71"></div><span>67–100%</span></div>
+  </div>
+
+</div>
+
+<script>
+// ---- DATA ----
+const rows = [
+  {eje:"1. Renovables",       unit:"% gen. eléctrica", target:90,  metas:{2030:30, 2040:60, 2050:90}},
+  {eje:"2. H₂ Verde",         unit:"Mt/a",              target:5,   metas:{2030:0.5,2040:2,  2050:5}},
+  {eje:"3. Almacenamiento",   unit:"GWh",               target:50,  metas:{2030:5,  2040:20, 2050:50}},
+  {eje:"4. Refinerías",       unit:"hito",              semaforo:true,
+    metas:{
+      2030:{label:"1 COV cero",           level:"red"},
+      2040:{label:"50% biocomb.",         level:"yellow"},
+      2050:{label:"Cierre progresivo",    level:"green"}
+    }
+  },
+  {eje:"5. Petroquímica Verde",unit:"%",                target:100, metas:{2030:20, 2040:50, 2050:100}},
+  {eje:"6. Litio / Minerales", unit:"kt LCE",           target:70,  metas:{2030:10, 2040:30, 2050:70}},
+  {eje:"+ Justicia Laboral",   unit:"% reconvertidos",  target:100, metas:{2030:30, 2040:80, 2050:100}},
+];
+
+// ---- STATE ----
+let currentYear = 2030;
+let sortKey = null;
+let sortDir = -1;
+let playing = false;
+let playInterval = null;
+
+// ---- HELPERS ----
+function lerp(a, b, t){ return a + (b - a) * t; }
+
+function interpolateVal(row, year){
+  if(row.semaforo) return null;
+  const years = [2030, 2040, 2050];
+  const vals  = years.map(y => row.metas[y]);
+  if(year <= 2025) return lerp(0, vals[0], (year-2025)/5);
+  if(year <= 2030) return lerp(0, vals[0], (year-2025)/5);
+  if(year <= 2040) return lerp(vals[0], vals[1], (year-2030)/10);
+  if(year <= 2050) return lerp(vals[1], vals[2], (year-2040)/10);
+  return vals[2];
+}
+
+function semLevel(year){
+  if(year <= 2030) return "red";
+  if(year <= 2040) return "yellow";
+  return "green";
+}
+
+function semLabel(year){
+  if(year <= 2030) return "1 COV cero";
+  if(year <= 2040) return "50% biocomb.";
+  return "Cierre progresivo";
+}
+
+function colorFor(p){
+  if(p <= 0.33) return "#e74c3c";
+  if(p <= 0.66) return "#f1c40f";
+  return "#2ecc71";
+}
+
+function fmt(v){
+  if(v === null || v === undefined) return "—";
+  if(v < 10 && v % 1 !== 0) return v.toFixed(2);
+  return Math.round(v);
+}
+
+// ---- RENDER ----
+function render(animate){
+  const y = currentYear;
+  document.getElementById("yearBadge").textContent = y;
+  document.getElementById("slider").value = y;
+
+  // global progress
+  const gp = ((y - 2025) / 25) * 100;
+  document.getElementById("globalFill").style.width = gp + "%";
+
+  // build display rows
+  let display = rows.map(r => {
+    if(r.semaforo){
+      return {...r, _val:null, _pct:null, _level:semLevel(y), _label:semLabel(y)};
+    }
+    const val = interpolateVal(r, y);
+    const pct = val / r.target;
+    return {...r, _val:val, _pct:pct};
+  });
+
+  // sort
+  if(sortKey){
+    display.sort((a,b)=>{
+      const av = sortKey==="val" ? (a._val??-1) : (a._pct??-1);
+      const bv = sortKey==="val" ? (b._val??-1) : (b._pct??-1);
+      return (av - bv) * sortDir;
+    });
+  }
+
+  // sort marks
+  ["Val","Pct"].forEach(k=>{
+    const el = document.getElementById("sm"+k);
+    if(!el) return;
+    const key = k.toLowerCase();
+    el.textContent = sortKey===key ? (sortDir===1?"▲":"▼") : "";
+  });
+
+  const tbody = document.getElementById("tbody");
+  tbody.innerHTML = display.map(r => {
+    if(r.semaforo){
+      const colors = {red:"#e74c3c", yellow:"#f1c40f", green:"#2ecc71"};
+      const c = colors[r._level];
+      return `
+        <tr>
+          <td><div class="eje-name">${r.eje}</div><div class="eje-unit">${r.unit}</div></td>
+          <td colspan="2">
+            <div class="cell" style="background:rgba(0,0,0,.2)">
+              <span class="sem-dot" style="background:${c};color:${c}"></span>
+              <span class="sem-text">${r._label}</span>
+            </div>
+          </td>
+          <td><span style="color:var(--muted);font-size:12px;">Cierre progresivo</span></td>
+          <td>
+            <div class="cell" style="background:${c}22;border-color:${c}55">
+              <span style="color:${c};font-weight:700;font-size:12px;">
+                ${r._level==="red"?"🔴 Inicio":r._level==="yellow"?"🟡 Transición":"🟢 Meta"}
+              </span>
+            </div>
+          </td>
+        </tr>`;
+    }
+
+    const pct = r._pct;
+    const val = r._val;
+    const color = colorFor(pct);
+    const pctPx = Math.min(100, Math.round(pct*100));
+
+    return `
+      <tr>
+        <td><div class="eje-name">${r.eje}</div><div class="eje-unit">${r.unit}</div></td>
+        <td>
+          <div class="cell${animate?" animate":""}" style="background:${color}22;border-color:${color}55">
+            <span class="cell-val" style="color:${color}">${fmt(val)}</span>
+            <div class="cell-bar" style="background:${color};width:${pctPx}%"></div>
+          </div>
+        </td>
+        <td>
+          <div class="cell" style="background:${color}22;border-color:${color}55">
+            <div style="flex:1;background:rgba(0,0,0,.3);border-radius:999px;height:8px;overflow:hidden">
+              <div style="height:100%;width:${pctPx}%;background:${color};border-radius:999px;transition:width .9s ease"></div>
+            </div>
+            <span class="cell-pct" style="color:${color}">${pctPx}%</span>
+          </div>
+        </td>
+        <td><span style="color:var(--muted);font-size:12px;">${r.target} ${r.unit}</span></td>
+        <td>
+          <div class="cell" style="background:${color}22;border-color:${color}55">
+            <span style="color:${color};font-weight:700;font-size:12px;">
+              ${pct<=0.33?"🔴 Inicio":pct<=0.66?"🟡 En curso":"🟢 Avanzado"}
+            </span>
+          </div>
+        </td>
+      </tr>`;
+  }).join("");
+}
+
+// ---- PLAY ----
+function startPlay(){
+  if(playing) return;
+  playing = true;
+  document.getElementById("btnPlay").textContent = "⏹ Detener";
+  if(currentYear >= 2050) currentYear = 2025;
+  playInterval = setInterval(()=>{
+    currentYear++;
+    render(true);
+    if(currentYear >= 2050){
+      clearInterval(playInterval);
+      playing = false;
+      document.getElementById("btnPlay").textContent = "▶ Reproducir";
+    }
+  }, 120);
+}
+
+function stopPlay(){
+  clearInterval(playInterval);
+  playing = false;
+  document.getElementById("btnPlay").textContent = "▶ Reproducir";
+}
+
+// ---- EVENTS ----
+document.getElementById("btnPlay").onclick = ()=>{
+  playing ? stopPlay() : startPlay();
+};
+
+document.getElementById("slider").oninput = e => {
+  stopPlay();
+  currentYear = +e.target.value;
+  render(false);
+};
+
+document.querySelectorAll(".btn[data-year]").forEach(b=>{
+  b.onclick = ()=>{
+    stopPlay();
+    currentYear = +b.dataset.year;
+    document.querySelectorAll(".btn[data-year]").forEach(x=>x.classList.remove("active"));
+    b.classList.add("active");
+    render(true);
+  };
+});
+
+document.querySelectorAll("th[data-sort]").forEach(th=>{
+  th.onclick = ()=>{
+    const k = th.dataset.sort;
+    if(sortKey===k) sortDir*=-1;
+    else{sortKey=k;sortDir=-1;}
+    render(false);
+  };
+});
+
+// ---- INIT ----
+render(false);
+</script>
+</body>
+</html>
