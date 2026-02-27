@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Esquema de Gobernanza Energética - UNTyPP</title>
+    <style>
+        :root {
+            --primary: #1a5276; /* Azul Pemex/Institucional */
+            --secondary: #1e8449; /* Verde CFE/Energía */
+            --accent: #784212; /* Café Transformación */
+            --bg: #f4f7f6;
+            --text: #2c3e50;
+            --line: #bdc3c7;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            margin: 0;
+            padding: 40px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .container {
+            max-width: 1000px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* --- Estilos de los Bloques --- */
+        .box {
+            background: white;
+            border: 2px solid var(--line);
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        .box:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+        }
+
+        .box h3 {
+            margin: 0 0 10px 0;
+            font-size: 16px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .box p {
+            margin: 0;
+            font-size: 13px;
+            color: #666;
+            line-height: 1.4;
+        }
+
+        /* --- Niveles --- */
+        .level-1 { width: 80%; border-top: 4px solid var(--primary); }
+        
+        .level-2-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            width: 100%;
+            margin-top: 40px;
+        }
+
+        .level-3 { 
+            width: 100%; 
+            margin-top: 60px; 
+            border-bottom: 4px solid var(--secondary);
+        }
+
+        /* --- Conectores (Líneas) --- */
+        .connector-v {
+            width: 2px;
+            height: 40px;
+            background-color: var(--line);
+        }
+
+        .connector-h-line {
+            width: 66%;
+            height: 2px;
+            background-color: var(--line);
+            position: relative;
+        }
+
+        /* --- Regiones --- */
+        .regions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            gap: 10px;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px dashed #ccc;
+        }
+
+        .region-tag {
+            background: #ebf5fb;
+            color: var(--primary);
+            font-size: 11px;
+            font-weight: bold;
+            padding: 5px;
+            border-radius: 4px;
+        }
+
+        @media (max-width: 768px) {
+            .level-2-container { grid-template-columns: 1fr; }
+            .connector-h-line { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        
+        <!-- Nivel 1: Consejo Nacional -->
+        <div class="box level-1">
+            <h3>Consejo Nacional de Transición Energética</h3>
+            <p>Presidencia, SENER, SHCP, SEMARNAT, Pemex, CFE, Academia, Sindicato, Sociedad Civil</p>
+        </div>
+
+        <div class="connector-v"></div>
+        <div class="connector-h-line"></div>
+
+        <!-- Nivel 2: Entidades Ejecutoras -->
+        <div class="level-2-container">
+            
+            <div class="box" style="border-top: 4px solid var(--primary);">
+                <h3>PEMEX Nueva Generación</h3>
+                <p>8 Unidades de Negocio Estratégicas</p>
+            </div>
+
+            <div class="box" style="border-top: 4px solid var(--secondary);">
+                <h3>CFE</h3>
+                <p>Generación, Transmisión y Distribución</p>
+            </div>
+
+            <div class="box" style="border-top: 4px solid var(--accent);">
+                <h3>Instituciones de Apoyo</h3>
+                <p>IMP, CONACYT, Universidades Públicas</p>
+            </div>
+
+        </div>
+
+        <div class="connector-v" style="height: 60px;"></div>
+
+        <!-- Nivel 3: Consejos Regionales -->
+        <div class="box level-3">
+            <h3>Consejos Regionales de Desarrollo Energético</h3>
+            <p>(Participación Local y Comunitaria)</p>
+            
+            <div class="regions-grid">
+                <div class="region-tag">SURESTE</div>
+                <div class="region-tag">GOLFO</div>
+                <div class="region-tag">NORESTE</div>
+                <div class="region-tag">ISTMO</div>
+                <div class="region-tag">NOROESTE</div>
+                <div class="region-tag">CENTRO</div>
+                <div class="region-tag">PACÍFICO</div>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>
