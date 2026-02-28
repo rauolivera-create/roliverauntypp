@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Poyectos Industriales Clave</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      font-family: Arial, sans-serif;
+      margin: 10px;
+      background-color: #f0f2f5;
+    }
+    h1 {
+      text-align: center;
+      color: #333;
+      font-size: 1em;
+      margin-bottom: 10px;
+      padding: 6px;
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+    }
+    .cadena {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+      padding: 4px;
+    }
+    @media (max-width: 900px) {
+      .cadena { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 500px) {
+      .cadena { grid-template-columns: 1fr; }
+    }
+    .nodo {
+      background: #fff;
+      border-radius: 8px;
+      padding: 10px 10px 8px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+      text-align: center;
+      position: relative;
+      border-top: 3px solid currentColor;
+    }
+    .icono {
+      font-size: 22px;
+      margin-bottom: 4px;
+      display: block;
+    }
+    .nodo h2 {
+      margin: 0 0 3px;
+      font-size: 0.78em;
+      font-weight: 700;
+      line-height: 1.2;
+    }
+    .nodo p {
+      font-size: 0.7em;
+      margin: 0 0 5px;
+      color: #555;
+      line-height: 1.3;
+    }
+    .empleos {
+      text-align: left;
+      font-size: 0.68em;
+      margin: 0;
+      padding-left: 12px;
+      color: #444;
+    }
+    .empleos li { margin-bottom: 1px; }
+    /* Colores diferenciados */
+    .hidrogeno { color: #0077b6; }
+    .petroquimica { color: #ef476f; }
+    .infraestructura { color: #118ab2; }
+    .ccus { color: #073b4c; }
+    .biocombustibles { color: #06d6a0; }
+    .renovables { color: #e6a800; }
+    .geoenergia { color: #8d99ae; }
+    .digitalizacion { color: #8338ec; }
+
+    .nota {
+      font-weight: bold;
+      text-align: center;
+      margin-top: 10px;
+      color: #9b2226;
+      font-size: 0.85em;
+      padding: 6px;
+      background: #fff3f3;
+      border-radius: 6px;
+    }
+  </style>
+</head>
+<body>
+  <h1> Proyectos Industriales Estrategicos (Donde Estará el Empleo)</h1>
+
+  <div class="cadena">
+    <div class="nodo hidrogeno">
+      <i class="fa-solid fa-gas-pump icono"></i>
+      <h2>Hidrógeno industrial</h2>
+      <p>Producción, almacenamiento y distribución de H2 verde y azul.</p>
+      <ul class="empleos">
+        <li>Ingeniería</li>
+        <li>Operación de electrolizadores</li>
+        <li>Seguridad</li>
+      </ul>
+    </div>
+
+    <div class="nodo petroquimica">
+      <i class="fa-solid fa-recycle icono"></i>
+      <h2>Petroquímica circular</h2>
+      <p>Reciclaje químico de plásticos y valorización de residuos.</p>
+      <ul class="empleos">
+        <li>Procesos químicos</li>
+        <li>Gestión de materiales</li>
+        <li>Sostenibilidad</li>
+      </ul>
+    </div>
+
+    <div class="nodo infraestructura">
+      <i class="fa-solid fa-bolt icono"></i>
+      <h2>Infraestructura eléctrica</h2>
+      <p>Modernización de redes, integración de renovables y almacenamiento.</p>
+      <ul class="empleos">
+        <li>Montaje eléctrico</li>
+        <li>Mantenimiento</li>
+        <li>Gestión de red</li>
+      </ul>
+    </div>
+
+    <div class="nodo ccus">
+      <i class="fa-solid fa-cloud icono"></i>
+      <h2>CCUS</h2>
+      <p>Captura, uso y almacenamiento de carbono.</p>
+      <ul class="empleos">
+        <li>Ingeniería de procesos</li>
+        <li>Geología</li>
+        <li>Monitoreo ambiental</li>
+      </ul>
+    </div>
+
+    <div class="nodo biocombustibles">
+      <i class="fa-solid fa-leaf icono"></i>
+      <h2>Biocombustibles</h2>
+      <p>Producción de SAF y biodiésel de segunda generación.</p>
+      <ul class="empleos">
+        <li>Biotecnología</li>
+        <li>Operación de biorrefinerías</li>
+        <li>Logística</li>
+      </ul>
+    </div>
+
+    <div class="nodo renovables">
+      <i class="fa-solid fa-solar-panel icono"></i>
+      <h2>Renovables industriales</h2>
+      <p>Integración de energía solar y eólica en procesos industriales.</p>
+      <ul class="empleos">
+        <li>Instalación</li>
+        <li>Mantenimiento</li>
+        <li>Eficiencia energética</li>
+      </ul>
+    </div>
+
+    <div class="nodo geoenergia">
+      <i class="fa-solid fa-mountain icono"></i>
+      <h2>Geoenergía</h2>
+      <p>Aprovechamiento de calor geotérmico profundo.</p>
+      <ul class="empleos">
+        <li>Perforación</li>
+        <li>Ingeniería de yacimientos</li>
+        <li>Operación de plantas</li>
+      </ul>
+    </div>
+
+    <div class="nodo digitalizacion">
+      <i class="fa-solid fa-microchip icono"></i>
+      <h2>Digitalización energética</h2>
+      <p>Implementación de IA, IoT y análisis de datos en energía.</p>
+      <ul class="empleos">
+        <li>Desarrollo de software</li>
+        <li>Ciberseguridad</li>
+        <li>Análisis de datos</li>
+      </ul>
+    </div>
+  </div>
+
+  <p class="nota">Esto es fundamental para sindicatos. Adaptación y formación son clave.</p>
+</body>
+</html>
