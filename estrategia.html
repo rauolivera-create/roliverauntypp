@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Transición Energética Justa – UNTyPP</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&family=Open+Sans:wght@400;600&display=swap');
+
+    :root {
+      --azul-oscuro: #0a1e3d;
+      --azul-medio: #1a3a6c;
+      --azul-claro: #2563a8;
+      --rojo: #c1121f;
+      --rojo-claro: #e63946;
+      --gris: #4a5568;
+      --gris-claro: #f0f4f8;
+      --dorado: #f4c430;
+      --blanco: #ffffff;
+      --texto: #1e293b;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Open Sans', sans-serif;
+      background: var(--gris-claro);
+      color: var(--texto);
+      line-height: 1.7;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      background: linear-gradient(135deg, var(--azul-oscuro) 0%, var(--azul-medio) 60%, #0d3b6e 100%);
+      color: var(--blanco);
+      padding: 60px 24px 50px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+
+    .hero-inner { position: relative; max-width: 860px; margin: 0 auto; }
+
+    .logo-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+    }
+
+    .logo-img {
+      width: 90px;
+      height: auto;
+      filter: drop-shadow(0 6px 14px rgba(0,0,0,0.4));
+    }
+
+    .badge {
+      background: var(--rojo);
+      color: var(--blanco);
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 900;
+      font-size: 0.95rem;
+      letter-spacing: 3px;
+      padding: 8px 22px;
+      border-radius: 4px;
+      text-transform: uppercase;
+    }
+
+    .hero h1 {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 900;
+      font-size: clamp(1.5rem, 4vw, 2.5rem);
+      line-height: 1.2;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 16px;
+    }
+
+    .hero h1 span { color: var(--dorado); }
+
+    .hero-sub {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 600;
+      font-size: clamp(0.9rem, 2vw, 1.1rem);
+      color: #cbd5e1;
+      border-top: 1px solid rgba(255,255,255,0.2);
+      padding-top: 14px;
+      margin-top: 6px;
+    }
+
+    /* ── LAYOUT ── */
+    .page { max-width: 960px; margin: 0 auto; padding: 48px 20px 60px; }
+
+    /* ── SECTION TITLE ── */
+    .section-title {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 900;
+      font-size: 1.35rem;
+      color: var(--azul-oscuro);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin: 48px 0 20px;
+      padding-bottom: 10px;
+      border-bottom: 3px solid var(--rojo);
+    }
+
+    .section-title .emoji { font-size: 1.5rem; }
+
+    /* ── SUBSECTION ── */
+    .subsection {
+      background: var(--blanco);
+      border-radius: 12px;
+      padding: 28px 28px 24px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+      border-left: 5px solid var(--azul-claro);
+    }
+
+    .subsection h3 {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 1.05rem;
+      color: var(--azul-claro);
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .subsection h3::before {
+      content: '🔹';
+      font-size: 1rem;
+    }
+
+    /* ── QUOTE ── */
+    blockquote {
+      background: linear-gradient(90deg, #e8f0fb, #f0f4f8);
+      border-left: 5px solid var(--azul-claro);
+      border-radius: 0 8px 8px 0;
+      padding: 16px 20px;
+      font-style: italic;
+      font-size: 1.05rem;
+      color: var(--azul-oscuro);
+      margin: 12px 0 16px;
+    }
+
+    /* ── LISTS ── */
+    ul.styled {
+      list-style: none;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    ul.styled li {
+      padding-left: 22px;
+      position: relative;
+      font-size: 0.97rem;
+    }
+
+    ul.styled li::before {
+      content: '▸';
+      position: absolute;
+      left: 0;
+      color: var(--rojo-claro);
+      font-weight: bold;
+    }
+
+    ul.styled li ul {
+      margin-top: 6px;
+      padding-left: 16px;
+      list-style: disc;
+      color: var(--gris);
+    }
+
+    /* ── VISUAL HINT ── */
+    .visual-hint {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #fef9e7;
+      border: 1px dashed #f4c430;
+      border-radius: 6px;
+      padding: 6px 14px;
+      font-size: 0.85rem;
+      color: #7d6608;
+      margin-top: 12px;
+    }
+
+    /* ── TABLES ── */
+    .table-wrap {
+      overflow-x: auto;
+      margin-top: 16px;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+      background: var(--blanco);
+    }
+
+    thead tr {
+      background: var(--azul-oscuro);
+      color: var(--blanco);
+    }
+
+    thead th {
+      padding: 13px 16px;
+      text-align: left;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 0.85rem;
+      letter-spacing: 0.5px;
+    }
+
+    tbody tr:nth-child(even) { background: #f0f4f8; }
+    tbody tr:hover { background: #dbeafe; transition: background 0.2s; }
+
+    tbody td {
+      padding: 12px 16px;
+      border-bottom: 1px solid #e2e8f0;
+      vertical-align: top;
+    }
+
+    .tag {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 20px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    .tag-madura    { background: #d1fae5; color: #065f46; }
+    .tag-temprana  { background: #fef3c7; color: #92400e; }
+    .tag-intermedia{ background: #dbeafe; color: #1e40af; }
+    .tag-nd        { background: #f3f4f6; color: #6b7280; }
+
+    /* ── PRINCIPIOS ── */
+    .principios-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 18px;
+      margin-top: 16px;
+    }
+
+    .principio-card {
+      background: var(--blanco);
+      border-radius: 10px;
+      padding: 22px 20px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.07);
+      border-top: 4px solid var(--azul-claro);
+      text-align: center;
+    }
+
+    .principio-card .p-icon { font-size: 2rem; margin-bottom: 10px; }
+    .principio-card h4 {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: var(--azul-oscuro);
+      margin-bottom: 8px;
+    }
+    .principio-card p { font-size: 0.88rem; color: var(--gris); }
+    .principio-card .indicador {
+      margin-top: 10px;
+      font-size: 0.8rem;
+      color: var(--rojo);
+      font-weight: 600;
+    }
+
+    /* ── TIMELINE 90 DÍAS ── */
+    .timeline {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      margin-top: 16px;
+    }
+
+    .tl-item {
+      display: flex;
+      gap: 0;
+    }
+
+    .tl-left {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 56px;
+      flex-shrink: 0;
+    }
+
+    .tl-dot {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: var(--azul-claro);
+      color: var(--blanco);
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 0.75rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      z-index: 1;
+    }
+
+    .tl-line {
+      width: 2px;
+      flex: 1;
+      background: #cbd5e1;
+      min-height: 20px;
+    }
+
+    .tl-item:last-child .tl-line { display: none; }
+
+    .tl-content {
+      background: var(--blanco);
+      border-radius: 10px;
+      padding: 14px 18px;
+      margin: 0 0 14px 12px;
+      flex: 1;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+      border-left: 4px solid var(--rojo);
+    }
+
+    .tl-content .semana {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 0.8rem;
+      color: var(--rojo);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 4px;
+    }
+
+    .tl-content p { font-size: 0.95rem; color: var(--texto); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--azul-oscuro);
+      color: #94a3b8;
+      text-align: center;
+      padding: 28px 20px;
+      font-size: 0.88rem;
+    }
+
+    footer strong { color: var(--blanco); }
+
+    @media (max-width: 600px) {
+      .subsection { padding: 20px 16px; }
+      thead th, tbody td { padding: 10px 10px; font-size: 0.82rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ══ HERO ══ -->
+  <div class="hero">
+    <div class="hero-inner">
+      <div class="logo-row">
+        <img class="logo-img" src="logountypp.jpeg" alt="Logotipo UNTyPP"/>
+        <div class="badge">UNTyPP</div>
+      </div>
+      <h1>Transición Energética <span>Justa</span><br>Propuesta de Inclusión Sindical en Pemex</h1>
+      <p class="hero-sub">📘 Estrategia de Inclusión de la UNTyPP en la Transición Energética de Pemex</p>
+    </div>
+  </div>
+
+  <!-- ══ CONTENIDO ══ -->
+  <div class="page">
+
+    <!-- ── SECCIÓN 1 ── -->
+    <div class="section-title">
+      <span class="emoji">🧭</span> 1. Estrategia de Incidencia Política: Diálogo Social
+    </div>
+
+    <div class="subsection">
+      <h3>Narrativa Sindical</h3>
+      <blockquote>
+        "La transición energética no puede ser justa si excluye a quienes sostienen el conocimiento técnico de Pemex."
+      </blockquote>
+      <div class="visual-hint">📊 Visual sugerido: Infografía tipo línea de tiempo — evolución de Pemex → irrupción de renovables → invisibilización sindical → propuesta de inclusión</div>
+    </div>
+
+    <div class="subsection">
+      <h3>Mesa Técnica Tripartita</h3>
+      <ul class="styled">
+        <li>Crear una instancia formal de diálogo entre la <strong>Dirección General de Pemex</strong>, el <strong>Cuerpo de Gobierno CAP</strong> y la <strong>UNTyPP</strong> para evaluar proyectos de transición.</li>
+        <li>Participación en diseño, evaluación y seguimiento de proyectos.</li>
+      </ul>
+      <div class="visual-hint">📊 Visual sugerido: Diagrama de Venn — intersección de saber técnico, gobernanza institucional y justicia laboral</div>
+    </div>
+
+    <!-- ── SECCIÓN 2 ── -->
+    <div class="section-title">
+      <span class="emoji">⚙️</span> 2. Inserción en la Cadena Productiva
+    </div>
+
+    <div class="subsection">
+      <h3>Mapeo de Capacidades Técnicas</h3>
+      <ul class="styled">
+        <li>Inventario de perfiles profesionales de la UNTyPP.</li>
+        <li>Identificación de competencias transferibles a energías renovables.</li>
+      </ul>
+      <div class="visual-hint">📊 Visual sugerido: Matriz de competencias vs. tecnologías (solar, eólica, geotérmica, hidrógeno, etc.)</div>
+    </div>
+
+    <div class="subsection">
+      <h3>Análisis de Proyectos Prioritarios</h3>
+      <p style="margin-bottom:10px;">Evaluar viabilidad de participación sindical en:</p>
+      <ul class="styled">
+        <li>Energía marina</li>
+        <li>Bioenergía</li>
+        <li>Extracción de minerales críticos</li>
+      </ul>
+      <div class="visual-hint">📊 Visual sugerido: Mapa de cadena de valor con puntos de inserción sindical</div>
+    </div>
+
+    <div class="subsection">
+      <h3>Propuesta de Participación</h3>
+      <ul class="styled">
+        <li>Proyectos piloto con participación técnica sindical.</li>
+        <li>Capacitación interna para reconversión laboral <strong>sin despidos</strong>.</li>
+      </ul>
+    </div>
+
+    <!-- ── SECCIÓN 3 ── -->
+    <div class="section-title">
+      <span class="emoji">🛡️</span> 3. Principios Rectores
+    </div>
+
+    <div class="principios-grid">
+      <div class="principio-card">
+        <div class="p-icon">🤝</div>
+        <h4>No dejar a nadie atrás</h4>
+        <p>Reconversión sin despidos</p>
+        <div class="indicador">📌 % de trabajadores reubicados</div>
+      </div>
+      <div class="principio-card">
+        <div class="p-icon">🔍</div>
+        <h4>Transparencia y participación</h4>
+        <p>Acceso a información técnica y presupuestal</p>
+        <div class="indicador">📌 Nº de reuniones tripartitas realizadas</div>
+      </div>
+      <div class="principio-card">
+        <div class="p-icon">🏅</div>
+        <h4>Reconocimiento profesional</h4>
+        <p>Visibilización del saber técnico</p>
+        <div class="indicador">📌 Nº de técnicos sindicales en proyectos</div>
+      </div>
+    </div>
+
+    <div class="subsection" style="margin-top:20px;">
+      <h3>Alianzas Estratégicas</h3>
+      <ul class="styled">
+        <li>Vinculación con sindicatos globales (ej. <strong>TUED</strong>, <strong>IndustriALL</strong>).</li>
+        <li>Convenios con universidades públicas para co-diseñar proyectos y capacitar trabajadores.</li>
+      </ul>
+    </div>
+
+    <!-- ── TABLA PROYECTOS ── -->
+    <div class="section-title">
+      <span class="emoji">🔋</span> Proyectos de Transición Energética en Pemex
+    </div>
+
+    <p style="margin-bottom:16px; font-size:0.95rem; color:var(--gris);">
+      Iniciativas identificadas en el <em>Plan Estratégico para el Fortalecimiento de Petróleos Mexicanos 2025–2035</em>, con su nivel de madurez tecnológica e impacto en la cadena productiva.
+    </p>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Iniciativa de Transición Energética</th>
+            <th>Nivel de Maduración</th>
+            <th>Observaciones / Impacto en la Cadena Productiva</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Generación fotovoltaica para autoconsumo</strong></td>
+            <td><span class="tag tag-madura">Madura</span></td>
+            <td>Fase I: 144 hectáreas. Afecta Distribución y Logística, y potencialmente Procesamiento (refinerías).</td>
+          </tr>
+          <tr>
+            <td><strong>Impulso a la electromovilidad</strong></td>
+            <td><span class="tag tag-madura">Madura</span></td>
+            <td>En evaluación. Impacto directo en Distribución y Logística (flota, estaciones de servicio).</td>
+          </tr>
+          <tr>
+            <td><strong>Producción de litio a partir de salmueras petroleras</strong></td>
+            <td><span class="tag tag-temprana">Adopción temprana</span></td>
+            <td>15 campos Región Sur, 11 Región Norte, Regiones Marinas. Afecta Exploración y Extracción.</td>
+          </tr>
+          <tr>
+            <td><strong>Aprovechamiento de energía geotérmica de pozos</strong></td>
+            <td><span class="tag tag-temprana">Adopción temprana</span></td>
+            <td>39 campos terrestres y 39 marinos con altas temperaturas. Afecta Exploración y Extracción.</td>
+          </tr>
+          <tr>
+            <td><strong>Generación de energía en plataformas abandonadas</strong></td>
+            <td><span class="tag tag-madura">Madura</span></td>
+            <td>Potencial en 75 plataformas fuera de operación. Afecta Extracción y Procesamiento.</td>
+          </tr>
+          <tr>
+            <td><strong>Hidrógeno geológico (H₂)</strong></td>
+            <td><span class="tag tag-temprana">Adopción temprana</span></td>
+            <td>En evaluación. Afecta Exploración (identificación de fuentes).</td>
+          </tr>
+          <tr>
+            <td><strong>Biocombustibles</strong></td>
+            <td><span class="tag tag-intermedia">Intermedia</span></td>
+            <td>En evaluación. Afecta Procesamiento (refinación y mezclas) y Distribución.</td>
+          </tr>
+          <tr>
+            <td><strong>Extracción de minerales estratégicos (litio)</strong></td>
+            <td><span class="tag tag-nd">No especificado</span></td>
+            <td>Afecta directamente Extracción (nuevas operaciones) y Logística (transporte de mineral).</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- ── PLAN 90 DÍAS ── -->
+    <div class="section-title">
+      <span class="emoji">🚀</span> Propuesta de Acción Inmediata — Primeros 90 Días
+    </div>
+
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-left"><div class="tl-dot">S1–2</div><div class="tl-line"></div></div>
+        <div class="tl-content">
+          <div class="semana">Semanas 1 – 2</div>
+          <p>Reunión interna de liderazgo de la UNTyPP para validar esta estrategia.</p>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-left"><div class="tl-dot">S3–4</div><div class="tl-line"></div></div>
+        <div class="tl-content">
+          <div class="semana">Semanas 3 – 4</div>
+          <p>Elaboración del documento de posición y solicitud formal de diálogo con Pemex.</p>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-left"><div class="tl-dot">S5–6</div><div class="tl-line"></div></div>
+        <div class="tl-content">
+          <div class="semana">Semanas 5 – 6</div>
+          <p>Inicio de encuesta a trabajadores y mapeo de habilidades transferibles.</p>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-left"><div class="tl-dot">S7–8</div><div class="tl-line"></div></div>
+        <div class="tl-content">
+          <div class="semana">Semanas 7 – 8</div>
+          <p>Contacto con IMP, SEP, universidades y sindicatos internacionales para alianzas.</p>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-left"><div class="tl-dot">S9–12</div><div class="tl-line"></div></div>
+        <div class="tl-content">
+          <div class="semana">Semanas 9 – 12</div>
+          <p>Primera reunión de la Comisión Tripartita y presentación del <strong>"Mapa de Impacto Laboral"</strong>.</p>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /page -->
+
+  <!-- ══ FOOTER ══ -->
+  <footer>
+    <p><strong>UNTyPP</strong> — Unión Nacional de Técnicos y Profesionistas Petroleros</p>
+    <p style="margin-top:6px;">El futuro energético se construye con soberanía y con los trabajadores organizados. ✊</p>
+  </footer>
+
+</body>
+</html>
