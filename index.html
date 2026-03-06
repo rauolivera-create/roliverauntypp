@@ -2,31 +2,122 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Transicion Pemex GitHub Pages</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #f5f5f5;
+    }
+    
+    h1 {
+      color: #0066cc;
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    
+    .container {
+      display: flex;
+      gap: 30px;
+      margin-top: 30px;
+    }
+    
+    .column {
+      flex: 1;
+      background-color: white;
+      padding: 25px;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    
+    .column h2 {
+      color: #0066cc;
+      margin-top: 0;
+      margin-bottom: 20px;
+      font-size: 1.3em;
+      border-bottom: 3px solid #0066cc;
+      padding-bottom: 10px;
+    }
+    
+    .download-btn {
+      display: inline-block;
+      background-color: #0066cc;
+      color: white;
+      padding: 12px 24px;
+      text-decoration: none;
+      border-radius: 5px;
+      font-weight: bold;
+      transition: background-color 0.3s;
+      margin-bottom: 10px;
+    }
+    
+    .download-btn:hover {
+      background-color: #0052a3;
+    }
+    
+    .doc-link {
+      display: block;
+      background-color: #f8f9fa;
+      color: #0066cc;
+      padding: 12px 15px;
+      margin-bottom: 10px;
+      text-decoration: none;
+      border-radius: 5px;
+      border-left: 4px solid #0066cc;
+      transition: all 0.3s;
+    }
+    
+    .doc-link:hover {
+      background-color: #0066cc;
+      color: white;
+      transform: translateX(5px);
+    }
+    
+    @media (max-width: 768px) {
+      .container {
+        flex-direction: column;
+      }
+    }
+  </style>
 </head>
 <body>
-  <h1>Bienvenido a la UNTyPP Reconfiguracion </h1>
+  <h1>Bienvenido a la UNTyPP Transicion Energetica Justa</h1>
   
   <!-- Imagen generada -->
-<img src="reconversion inclusion.png" alt="Plan de reconversión e inclusión laboral de la UNTyPP para la transición energética justa" style="max-width: 100%; height: auto; margin-bottom: 20px; border-radius: 8px; color: white;">
-  <!-- Botón para descargar el documento Word -->
-  <div style="margin-bottom: 30px;">
-    <p><strong>Documento Oficial:</strong></p>
-    <a href="Propuesta_untypp.docx" download style="background-color: #0066cc; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; font-weight: bold;">
-      📥 Descargar Propuesta Integral UNTyPP (Word)
-    </a>
+  <img src="reconversion inclusion.png" alt="Plan de reconversión e inclusión laboral de la UNTyPP para la transición energética justa" style="max-width: 100%; height: auto; margin-bottom: 20px; border-radius: 8px;">
+  
+  <!-- Contenedor de dos columnas -->
+  <div class="container">
+   <!-- Columna izquierda: Documento Word -->
+<div class="column">
+  <h2>Documentos a discusión (primer saque)</h2>
+  <a href="Propuesta_untypp.docx" download class="download-btn">
+    📥 Propuesta Integral UNTyPP (Word)
+  </a>
+  
+  <!-- SEGUNDO DOCUMENTO - Agrega aquí -->
+  <a href="Pemex_descarbonizacion.docx" download class="download-btn">
+    📥 Descarbonizar de la opercion nuevos procesos (Word)
+  </a>
+  
+  <!-- Puedes agregar más documentos siguiendo el mismo patrón -->
+</div>
+    
+    <!-- Columna derecha: Enlaces a documentos -->
+    <div class="column">
+      <h2>Documentos de Analisis</h2>
+      <a href="reconfiguracion.html" class="doc-link">📄 Expansion Cadena Productiva</a>
+      <a href="https://rauolivera-create.github.io/untypp/Refinacionconversion.html" class="doc-link">📄 Estrategia Avances Reconversion REF PPQ</a>
+      <a href="https://rauolivera-create.github.io/untypp/eslabonesdos.html" class="doc-link">📄 Mapa de cadena</a>
+      <a href="https://rauolivera-create.github.io/untypp/Proyectos estrategicos.html" class="doc-link">📄 Proyectos creadores de empleo</a>
+      <a href="https://rauolivera-create.github.io/untypp/estrategia.html" class="doc-link">📄 Estrategia de inclusion de la UNTyPP</a>
+      <a href="https://rauolivera-create.github.io/untypp/reacomodo.html" class="doc-link">📄 Reestructura Acuerdo ACUERDO CMC/046/25</a>
+      <a href="https://rauolivera-create.github.io/untypp/proyectos_TE_pemex.html" class="doc-link">📄 Proyectos de Transicion Energetica Pemex (en definicion)</a>
+    </div>
   </div>
-
-  <p>Selecciona el archivo que quieres visualizar:</p>
-  <ul>
-    <li><a href="reconfiguracion.html">Expansion Cadena Productiva</a></li>
-    <li><a href="https://rauolivera-create.github.io/untypp/Refinacionconversion.html">Estrategia Avances Reconversion REF PPQ</a></li>
-    <li><a href="https://rauolivera-create.github.io/untypp/eslabonesdos.html"> Mapa de cadena </a></li>
-    <li><a href="https://rauolivera-create.github.io/untypp/Proyectos estrategicos.html"> Proyectos creadores de empleo </a></li>
-    <li><a href="https://rauolivera-create.github.io/untypp/estrategia.html"> Estrategia de inclusion de la UNTyPP </a></li>
-    <li><a href="https://rauolivera-create.github.io/untypp/reacomodo.html"> Reestructura Acuerdo ACUERDO CMC/046/25 </a></li>
-    <li><a href="https://rauolivera-create.github.io/untypp/proyectos_TE_pemex.html"> Proyectos de Transicion Energetica Pemex (en definicion) </a></li>
-  </ul>
 </body>
 </html>
 
